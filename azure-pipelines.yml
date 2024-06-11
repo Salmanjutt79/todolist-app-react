@@ -15,12 +15,6 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.SourcesDirectory)/build'
-    artifactName: 'myApp'
-    publishLocation: 'Container'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)/build'
@@ -28,10 +22,11 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/myApp.zip'
     replaceExistingArchive: true
+  displayName: 'Archive Build Folder to Zip'
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)/myApp.zip'
     artifactName: 'myAppZip'
     publishLocation: 'Container'
-
+  displayName: 'Publish Build Artifacts - myApp.zip'
